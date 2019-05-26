@@ -45,6 +45,10 @@ export default {
     };
   },
   methods: {
+    resetFields () {
+      this.title = '';
+      this.content = '';
+    },
     addMemo() {
       // 비구조화 할당을 이용하여 변수를 선언한다.
       const { title, content } = this;
@@ -59,6 +63,8 @@ export default {
       // addMemo 이벤트를 발생시키고 payload로 사용자가 입력한 데이터를 넣어준다.
       // emit을 이용하여 부모로 전파
       this.$emit("addMemo", { id, title, content });
+
+      this.resetFields();
     }
   }
 };
