@@ -13,6 +13,7 @@
           type="text"
           ref="content"
           :value="memo.content"
+          @blur="handleBlur"
           @keydown.enter="updateMemo"
         />
       </p>
@@ -31,12 +32,6 @@ import Memo from './Memo';
 export default {
   name: "Memo",
   // 부모에게 내려받은 props를 등록한다.
-  beforeUpdate () {
-    console.log("beforeUpdate =>", this.$refs.content)
-  },
-  updated () {
-    console.log("updated =>", this.$refs.content)
-  },
   data () {
     //현재 메모에 대한 수정 상태에 대한 데이터를 저장한다.
     return {
@@ -65,6 +60,9 @@ export default {
       this.$nextTick(() =>{
         this.$refs.content.focus()
       })
+    },
+    handleBlur () {
+      this.isEditing = false;
     },
     updateMemo (e) {
       console.log(e)
