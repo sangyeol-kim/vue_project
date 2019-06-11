@@ -19,7 +19,7 @@ import Memo from "./Memo";
 import axios from 'axios';
 
 const memoAPICore = axios.create({
-  baseURL: 'http://localhost:8080/api/memos'
+  baseURL: 'http://localhost:8000/api/memos'
 });
 
 export default {
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     // emit을 부모로 발생시킨 후 v-on 디렉티브를 이용하여 자식 컴포넌트에 콜백으로 연결
-    addMemo(payload) {
+    addMemo (payload) {
       // // MemoForm에서 올려받은 데이터를 먼저 컴포넌트 내부 데이터에 추가한다.
       // this.memos.push(payload);
       // // 내부 데이터를 문자열로 변환 후, 로컬 스토리지에 저장한다.
@@ -50,6 +50,8 @@ export default {
         .then(res => {
           this.memos.push(res.data)
         });
+      
+      this.$emit('change', this.memos.length)
     },
     storeMemo() {
       const memosToString = JSON.stringify(this.memos);
@@ -66,6 +68,8 @@ export default {
         .then(() =>{
           this.memos.splice(targetIndex, 1);
         });
+
+      this.$emit('change', this.memos.length)
     },
     updateMemo (payload) {
       // 수정된 메모를 저장한다.
