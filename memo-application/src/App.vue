@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <!-- 등록한 컴포넌트를 Template 영역에 커스텀 엘레먼트로 추가한다. -->
-    <app-header :memo-count="memoCount" />
-    <memo-app @change="updateMemoCount" />
+    <app-header/>
+    <memo-app/>
   </div>
 </template>
 
@@ -14,22 +14,10 @@ import MemoApp from "./components/MemoApp";
 
 export default {
   name: "app",
-
-  data () {
-    return {
-      memoCount: 0
-    }
-  },
   components: {
     // 위에서 등록한 컴포터넌트를 등록해준다.
     AppHeader,
     MemoApp
-  },
-  method: {
-    // MemoApp에서 change 이벤트가 발생되면 updateMemoCount 실행
-    updateMemoCount (count) {
-      this.memoCount = count
-    }
   }
 };
 </script>
